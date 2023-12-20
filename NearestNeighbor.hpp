@@ -7,6 +7,8 @@
 #include <limits>
 #include <algorithm>
 #include <climits>
+#include <fstream>
+#include <sstream>
 #ifndef NearestNeighbor_HPP
 #define NearestNeighbor_HPP
 
@@ -22,7 +24,7 @@ public:
         x = x_coordinate;
         y = y_coordinate;
     }
- 
+
 
     bool operator==(const Node& other) const
     {
@@ -36,14 +38,63 @@ public:
     }
 };
 
-void nearestNeighbor(std::vector<Node>& nodes)
+
+std::vector<Node> readFromFile(std::string filename)
+{
+    std::vector<Node> nodes;
+    std::ifstream file(filename);
+
+    if (file.is_open())
+    {
+        std::string line;
+        bool Readingnode = false;
+
+        while (std::getline(file, line))
+        {
+            if (line.find("NODE_COORD_SECTION") != std::string::npos)
+            {
+                Readingnode = true;
+                continue;
+            }
+
+            if (!Readingnode)
+            {
+                continue;
+            }
+
+            std::istringstream iss(line);
+            int node_id;
+            double x, y;
+
+            if (iss >> node_id >> x >> y)
+            {
+                nodes.emplace_back(node_id, x, y);
+            }
+            else
+            {
+                std::cerr << "Invalid line format: " << line << std::endl;
+            }
+        }
+
+        file.close();
+    }
+
+   
+  return nodes;
+}
+
+void nearestNeighbor(std::string filename)
 {
     std::clock_t start_time = std::clock();
-    
+    std::vector<Node> nodes = readFromFile(filename);
+    if (nodes.empty()) {
+        std::cerr << "Erro\n";
+        return;
+    }
     std::list<Node> visited;
     int totaldistance = 0;
-    Node start= nodes.front();
-    Node last = start;
+    Node start = nodes.front();
+    Node first = start;
     visited.push_back(start);
     nodes.erase(nodes.begin());
 
@@ -70,15 +121,15 @@ void nearestNeighbor(std::vector<Node>& nodes)
         nodes.erase(nearest);
     }
 
-    visited.push_back(last);
-    totaldistance += start.distance(last);
+    visited.push_back(first);
+    totaldistance += start.distance(first);
     for (const auto& node : visited)
     {
         std::cout << node.node << " ";
     }
     std::cout << std::endl;
     std::cout << "Total Distance: " << totaldistance << "\n";
-     std::clock_t end_time = std::clock();
+    std::clock_t end_time = std::clock();
     double elapsed_time = (end_time - start_time) / (double)CLOCKS_PER_SEC * 1000;
     std::cout << "Time in ms: " << elapsed_time << "\n";
 }
