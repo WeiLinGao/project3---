@@ -69,19 +69,19 @@ void nearestNeighbor(std::vector<Node>& nodes)
 
         nodes.erase(nearest);
     }
-    totaldistance += last.distance(visited.front());
-   
+
+    visited.push_back(last);
+    totaldistance += start.distance(last);
     for (const auto& node : visited)
     {
         std::cout << node.node << " ";
     }
     std::cout << std::endl;
     std::cout << "Total Distance: " << totaldistance << "\n";
-    std::clock_t end_time = std::clock();
+     std::clock_t end_time = std::clock();
     double elapsed_time = (end_time - start_time) / (double)CLOCKS_PER_SEC * 1000;
     std::cout << "Time in ms: " << elapsed_time << "\n";
 }
-
 
 
 #endif 
