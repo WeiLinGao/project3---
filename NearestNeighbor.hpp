@@ -81,46 +81,7 @@ void nearestNeighbor(std::vector<Node>& nodes)
     double elapsed_time = (end_time - start_time) / (double)CLOCKS_PER_SEC * 1000;
     std::cout << "Time in ms: " << elapsed_time << "\n";
 }
-/*
-void nearestNeighbor(std::vector<Node>& nodes)
-{
-    std::clock_t start_time = std::clock();
-    std::vector<Node> unvisited = nodes;
-    Node current = nodes[0];
-    std::vector<Node> visited = { current };
-    int total_distance = 0;
 
-    while (!unvisited.empty())
-    {
-        Node min_distance_node = unvisited[0];
-        int min_distance = current.distance(min_distance_node);
-
-        for (const auto& node : unvisited)
-        {
-            int dist = current.distance(node);
-            if (dist < min_distance)
-            {
-                min_distance = dist;
-                min_distance_node = node;
-            }
-        }
-
-        total_distance += min_distance;
-        current = min_distance_node;
-        visited.push_back(current);
-        unvisited.erase(std::remove(unvisited.begin(), unvisited.end(), current), unvisited.end());
-    }
-
-    total_distance += current.distance(visited[0]);
-    double elapsed_time = (std::clock() - start_time) / (double)CLOCKS_PER_SEC * 1000;
-
-    for (const auto& node : visited)
-    {
-        std::cout << node.node << " ";
-    }
-    std::cout << "\nTotal Distance: " << total_distance << "\nTime in ms: " << elapsed_time << std::endl;
-}
-*/
 
 
 #endif 
