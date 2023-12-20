@@ -74,10 +74,7 @@ void nearestNeighbor(std::string filename)
 {
     std::clock_t start_time = std::clock();
     std::vector<Node> nodes = readFromFile(filename);
-    if (nodes.empty()) {
-        std::cerr << "Erro\n";
-        return;
-    }
+ 
     std::list<Node> visited;
     int totaldistance = 0;
     Node start = nodes.front();
