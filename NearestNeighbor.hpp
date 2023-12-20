@@ -70,17 +70,14 @@ std::vector<Node> readFromFile(std::string filename)
             {
                 nodes.emplace_back(node_id, x, y);
             }
-            else
-            {
-                std::cerr << "Invalid line format: " << line << std::endl;
-            }
+     
         }
 
         file.close();
     }
 
-   
-  return nodes;
+
+    return nodes;
 }
 
 void nearestNeighbor(std::string filename)
