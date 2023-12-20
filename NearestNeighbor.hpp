@@ -47,21 +47,11 @@ std::vector<Node> readFromFile(std::string filename)
     if (file.is_open())
     {
         std::string line;
-        bool Readingnode = false;
+  
 
         while (std::getline(file, line))
         {
-            if (line.find("NODE_COORD_SECTION") != std::string::npos)
-            {
-                Readingnode = true;
-                continue;
-            }
-
-            if (!Readingnode)
-            {
-                continue;
-            }
-
+        
             std::istringstream iss(line);
             int node_id;
             double x, y;
