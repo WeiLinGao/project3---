@@ -49,7 +49,7 @@ public:
 
 /*
  * Read nodes' information from a file and return a vector of Node objects.
- * 
+ 
  * return: A vector of Node objects representing the nodes in the file.
  */
 std::vector<Node> readFromFile(std::string filename)
@@ -101,7 +101,7 @@ void nearestNeighbor(std::string filename)
 
     while (!nodes.empty())
     {
-        int minDistance = INT_MAX;               
+        int minDistance = INT_MAX;                     
         auto nearest = nodes.begin();             //Initialize the current nearest node to the first node in the nodes vector.
 
 
@@ -116,7 +116,7 @@ void nearestNeighbor(std::string filename)
             }
         }
 
-        start = *nearest;                             // Move to the nearest node, so it calculating the minimum distance between this node and every other node in the vector
+        start = *nearest;                             // Move to the nearest node, so in the next loop it's calculating the minimum distance between this node and every other node remaining in the vector
         visited.push_back(start);                  // store the next shorest visisted node in visited vector
         totaldistance += minDistance;               // add the distance to total 
 
