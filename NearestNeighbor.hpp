@@ -135,7 +135,7 @@ void nearestNeighbor(std::string filename)
     std::cout << "Total Distance: " << totaldistance << "\n";         //Print out the distance 
     std::clock_t end_time = std::clock();
     double elapsed_time = (end_time - start_time) / (double)CLOCKS_PER_SEC ;
-    std::cout << "Time in ms: " << elapsed_time << "\n";           // Print out Time
+    std::cout << "Time in seconds: " << elapsed_time << "\n";           // Print out Time
 }
 
 
